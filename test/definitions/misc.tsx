@@ -7,7 +7,7 @@
       };
     }
     renderCallback() {
-      return skate.h('div', `Hello, ${this.name}`);
+      return skate.h('div', {}, `Hello, ${this.name}`);
     }
   });
 }
@@ -45,7 +45,7 @@
       // By separating the strings (and not using template literals or string
       // concatenation) it ensures the strings are diffed indepenedently. If
       // you select "Count" with your mouse, it will not deselect whenr endered.
-      return skate.h('div', 'Count ', this.count);
+      return skate.h('div', {}, 'Count ', `${this.count}`);
     }
   });
 }
@@ -210,7 +210,7 @@
     arr: string[];
 
     renderCallback() {
-      return skate.h('div', 'testing');
+      return skate.h('div', {}, 'testing');
     }
   }
 
@@ -260,16 +260,18 @@
 { // https://github.com/skatejs/skatejs#rendercallback---supersedes-static-render
   customElements.define('my-component', class extends skate.Component<any> {
     renderCallback() {
-      return skate.h('p', `My name is ${this.tagName}.`);
+      return skate.h('p', {}, `My name is ${this.tagName}.`);
     }
   });
 
   customElements.define('my-component', class extends skate.Component<any> {
     renderCallback() {
-      return [
-        skate.h('paragraph 1'),
-        skate.h('paragraph 2'),
-      ];
+      return (
+        skate.h('div', {},
+          skate.h('p', {}, 'paragraph 1'),
+          skate.h('p', {}, 'paragraph 2')
+        )
+      );
     }
   });
 }
@@ -380,14 +382,14 @@
         skate.h('input', { name: 'someValue2', onChange: linkage, type: 'checkbox' }),
         skate.h('input', { name: 'someValue3', onChange: linkage, type: 'radio' }),
         skate.h('select', { name: 'someValue4', onChange: linkage },
-          skate.h('option', { value: 2 }, 'Option 2'),
-          skate.h('option', { value: 1 }, 'Option 1'),
+          skate.h('option', { value: '2' }, 'Option 2'),
+          skate.h('option', { value: '1' }, 'Option 1'),
         )
       ];
     }
   });
 }
-
+/*
 // #prop
 // @link https://skatejs.gitbooks.io/skatejs/content/docs/api/prop.html
 // ====================================================================
@@ -424,12 +426,12 @@
 
     renderCallback() {
       const { id, email } = this.user;
-      return [
+      return (
         <p>
           <div>ID: {id}</div>
           <div>Email: {email}</div>
         </p>
-      ];
+      );
     }
   }
 
@@ -445,11 +447,11 @@
 
     renderCallback() {
       const { users } = this;
-      return [
+      return (
         <ul>
           {users.map((user) => (<li><User user={user} /></li>))}
         </ul>
-      ];
+      );
     }
   }
 }
@@ -714,7 +716,9 @@
           <Page>
             <Menu slot={Page.slots.menu} ref={_e => console.log(_e)} />
 
-            {/* projection and refs doesn't work by default, because you cant ref,slot a function. Instead you need to manually propagate props */}
+            {
+              // projection and refs doesn't work by default, because you cant ref,slot a function. Instead you need to manually propagate props 
+            }
             <Header slot={Page.slots.header} />
             <Body slot={Page.slots.body} />
             <Footer slot="footer" ref={_e => console.log(_e)} />
@@ -725,3 +729,4 @@
     }
   }
 }
+*/

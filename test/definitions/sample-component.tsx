@@ -81,7 +81,7 @@ class SkatePark extends Component<SkateParkProps>{
   }
 }
 customElements.define(SkatePark.is, SkatePark);
-
+/*
 customElements.define("x-app", class extends skate.Component<{}> {
   renderCallback() {
     return (
@@ -92,7 +92,7 @@ customElements.define("x-app", class extends skate.Component<{}> {
     );
   }
 });
-
+*/
 export type ElmProps = { str: string; arr: any[]; };
 class Elem extends skate.Component<ElmProps> {
   static get props(): skate.ComponentProps<Elem, ElmProps> {
@@ -106,7 +106,7 @@ class Elem extends skate.Component<ElmProps> {
   arr: string[];
 
   renderCallback() {
-    return skate.h('div', 'testing');
+    return skate.h('div', {}, 'testing');
   }
 }
 
